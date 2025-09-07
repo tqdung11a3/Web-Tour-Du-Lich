@@ -122,10 +122,11 @@ if (registerForm) {
         .then((res) => res.json())
         .then((data) => {
           if (data.code == "error") {
-            alert(data.message);
+            notify.error(data.message);
           }
 
           if (data.code == "success") {
+            drawNotify(data.code, data.message);
             window.location.href = `/${pathAdmin}/account/register-initial`;
           }
         });
