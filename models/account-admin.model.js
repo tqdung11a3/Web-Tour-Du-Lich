@@ -5,6 +5,7 @@ const AccountAdmin = mongoose.model(
   {
     fullName: String,
     email: String,
+    password: String,
     status: String, // initial: khởi tạo, active: hoạt động, inactive: Tạm dừng
   },
   "accounts-admin"
