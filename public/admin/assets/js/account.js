@@ -24,9 +24,30 @@ if (loginForm) {
       const email = event.target.email.value;
       const password = event.target.password.value;
       const rememberPassword = event.target.rememberPassword.checked;
-      console.log(email);
-      console.log(password);
-      console.log(rememberPassword);
+
+      const dataFinal = {
+        email: email,
+        password: password,
+      };
+
+      fetch(`/${pathAdmin}/account/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code == "error") {
+            notify.error(data.message);
+          }
+
+          if (data.code == "success") {
+            drawNotify(data.code, data.message);
+            window.location.href = `/${pathAdmin}/dashboard`;
+          }
+        });
     });
 }
 // End Login Form
